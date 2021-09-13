@@ -1,0 +1,69 @@
+<robot name="box1">
+  <link name="world"/>
+  <joint name="base_joint" type="fixed">
+      <origin xyz="0.125 0 0.075" rpy="0 0 0" />
+      <parent link="world"/>
+      <child link="box1"/>
+  </joint>
+  <link name="box1">
+    <inertial>
+      <origin xyz="0 0 0" />
+      <mass value="1.0" />
+      <inertia  ixx="1.0" ixy="0.0"  ixz="0.0"  iyy="100.0"  iyz="0.0"  izz="1.0" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0"/>
+      <geometry>
+        <box size="0.25 0.25 0.15" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0"/>
+      <geometry>
+        <box size="0.25 0.25 0.15" />
+      </geometry>
+      <surface>
+          <friction>
+            <ode>
+              <mu>2</mu>
+              <mu2>2</mu2>
+              <fdir1>0 0 0</fdir1>
+              <slip1>0</slip1>
+              <slip2>0</slip2>
+            </ode>
+            <torsional>
+              <coefficient>1</coefficient>
+              <patch_radius>0.05</patch_radius>
+              <surface_radius>0</surface_radius>
+              <use_patch_radius>1</use_patch_radius>
+              <ode>
+                <slip>0</slip>
+              </ode>
+            </torsional>
+          </friction>
+          <bounce>
+            <restitution_coefficient>0</restitution_coefficient>
+            <threshold>1e+06</threshold>
+          </bounce>
+          <contact>
+            <collide_without_contact>0</collide_without_contact>
+            <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+            <collide_bitmask>1</collide_bitmask>
+             <ode>
+                <soft_cfm>0.1</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+7</kp>
+                <kd>1</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+          </contact>
+        </surface>
+    </collision>
+  </link>
+  <gazebo reference="box1">
+    <material>Gazebo/Blue</material>
+    <minDepth>0.003</minDepth>  
+    <maxVel>0</maxVel>  
+  </gazebo>
+</robot>
